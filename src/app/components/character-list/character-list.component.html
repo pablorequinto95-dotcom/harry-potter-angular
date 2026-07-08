@@ -1,0 +1,22 @@
+<div class="container">
+  <h1>Personajes de Harry Potter</h1>
+
+  <div *ngIf="cargando" class="mensaje">Cargando personajes...</div>
+  <div *ngIf="error" class="mensaje error">Error al cargar los datos de la API.</div>
+
+  <div class="grid" *ngIf="!cargando && !error">
+    <div class="card" *ngFor="let personaje of characters">
+      <img [src]="personaje.image" [alt]="personaje.name" *ngIf="personaje.image" class="card-img">
+      <div class="card-img placeholder" *ngIf="!personaje.image">Sin imagen</div>
+
+      <div class="card-body">
+        <h2>{{ personaje.name }}</h2>
+        <p><strong>Casa:</strong> {{ personaje.house || 'Desconocida' }}</p>
+        <p><strong>Actor/Actriz:</strong> {{ personaje.actor || 'No disponible' }}</p>
+        <p class="estado" [class.vivo]="personaje.alive" [class.fallecido]="!personaje.alive">
+          {{ personaje.alive ? 'Vivo' : 'Fallecido' }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
